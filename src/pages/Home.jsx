@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect } from "react";
 import {
   Accordion,
   AccordionPanel,
@@ -14,12 +14,20 @@ import {
   Paragraph,
   Page,
   PageContent,
+  ResponsiveContext,
   Tag,
   Text,
 } from "grommet";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+    const size = React.useContext(ResponsiveContext);
+
+  useEffect(() => {
+    console.log(size);
+    // Any side effects or subscriptions can be handled here
+  }, [size]);
+
   return (
     <Box width="100%">
       <Text>Tagline</Text>
@@ -65,7 +73,7 @@ const Home = () => {
           gap="medium"
         >
           <Box round="medium" width="medium" overflow="hidden">
-            <Image width="100%" fit="cover" src="RayTracer_0.png" />
+            <Image width="100%" fit="cover" src="/RayTracer_0.png" />
           </Box>
           <Box fill="horizontal" flex>
             <Heading level={3} margin="none">
@@ -91,7 +99,7 @@ const Home = () => {
           height="medium"
         >
           <Box round="medium" fill overflow="hidden">
-            <Image width="100%" fit="cover" src="Grommet_graphic_1.png" />
+            <Image width="100%" fit="cover" src="/Grommet_graphic_1.png" />
           </Box>
         </Box>
         <Box
@@ -104,7 +112,7 @@ const Home = () => {
           // width="m"
         >
           <Box round="medium" fill overflow="hidden">
-            <Image width="100%" fit="cover" src="DS_graphic_1.png" />
+            <Image width="100%" fit="cover" src="/DS_graphic_1.png" />
           </Box>
         </Box>
       </Box>

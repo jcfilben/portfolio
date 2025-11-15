@@ -39,6 +39,17 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Using Vite (development)
+
+This project has been updated to use Vite as the dev server/build tool. After installing dependencies, run:
+
+```bash
+npm install
+npm run dev
+```
+
+`npm run dev` starts the Vite dev server and opens your browser. `npm run build` will produce a production build using Vite, and `npm run preview` serves the built app locally for testing.
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

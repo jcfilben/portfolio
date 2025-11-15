@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionPanel,
@@ -22,6 +22,7 @@ import {
   Tag,
   Text,
 } from "grommet";
+import { useOutletContext } from "react-router-dom";
 
 const colors = {
   tan: "#D8CBC7",
@@ -49,6 +50,19 @@ const TableCell = ({ children }) => (
 );
 
 const RayTracer = () => {
+  // set the layout title when this page mounts
+  // useOutletContext comes from react-router-dom
+  const outlet = useOutletContext?.() || {};
+  const { setTitle, setSubtitle } = outlet;
+
+  useEffect(() => {
+    if (setTitle) setTitle("Ray Tracer");
+    if (setSubtitle) setSubtitle("subtitle");
+    return () => {
+      if (setTitle) setTitle("Jessica Rosenquist");
+      if (setSubtitle) setSubtitle("Frontend UI/UX Developer & Accessibility Advocate");
+    };
+  }, [setTitle, setSubtitle]);
   return (
     <>
       <Paragraph>
@@ -82,7 +96,7 @@ const RayTracer = () => {
           width={{ max: "medium", min: "xsmall" }}
         >
           <Box round="medium" fill overflow="hidden">
-            <Image width="100%" fit="cover" src="RayTracer_0.png" />
+            <Image width="100%" fit="cover" src="/RayTracer_0.png" />
           </Box>
         </Box>
         <Box
@@ -93,7 +107,7 @@ const RayTracer = () => {
           width={{ max: "medium", min: "xsmall" }}
         >
           <Box round="medium" fill overflow="hidden">
-            <Image width="100%" fit="cover" src="RayTracer_3.png" />
+            <Image width="100%" fit="cover" src="/RayTracer_3.png" />
           </Box>
         </Box>
         <Box
@@ -104,7 +118,7 @@ const RayTracer = () => {
           width={{ max: "medium", min: "xsmall" }}
         >
           <Box round="medium" fill overflow="hidden">
-            <Image width="100%" fit="cover" src="RayTracer_4.png" />
+            <Image width="100%" fit="cover" src="/RayTracer_4.png" />
           </Box>
         </Box>
       </Box>
@@ -125,7 +139,7 @@ const RayTracer = () => {
           width={{ max: "medium", min: "small" }}
         >
           <Box round="medium" fill overflow="hidden">
-            <Image width="100%" fit="cover" src="RayTracer_2.png" />
+            <Image width="100%" fit="cover" src="/RayTracer_2.png" />
           </Box>
         </Box>
         <Box
