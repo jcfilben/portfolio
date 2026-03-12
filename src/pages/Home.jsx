@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionPanel,
@@ -17,23 +17,125 @@ import {
   ResponsiveContext,
   Tag,
   Text,
+  Grid,
 } from "grommet";
 import { Link } from "react-router-dom";
+import { Add } from "grommet-icons";
+
+const ProjectCard = ({ title, description, imageSrc, link }) => (
+  <Card
+    background="white"
+    elevation="xsmall"
+    width={{ min: "small", max: "medium" }}
+  >
+    {/* <Link to={link}> */}
+    {/* <Image src={imageSrc} alt={title} fit="cover" /> */}
+    <Box pad="medium" gap="medium">
+      <Box alignSelf="center">
+        <Add color="rust" />
+      </Box>
+      <Box>
+        <Heading margin="none" level={3} size="small" textAlign="center">
+          {title}
+        </Heading>
+        <Paragraph textAlign="center">{description}</Paragraph>
+      </Box>
+    </Box>
+    {/* </Link> */}
+  </Card>
+);
+
+const skillGroups = [
+  {
+    title: "Frontend",
+    skills: ["React", "JavaScript", "TypeScript", "HTML", "CSS"],
+  },
+  {
+    title: "Accessibility",
+    skills: ["WCAG", "ARIA", "Screen Reader Testing", "Inclusive UX"],
+  },
+  {
+    title: "Tools",
+    skills: ["GitHub", "Jest", "Figma", "Storybook", "CircleCI", "ESLint", "JAWS"],
+  },
+  {
+    title: "Additional",
+    skills: ["Open Source Software", "Design Thinking", "C++", "Java", "Design Systems", "Technical Writing"],
+  },
+];
 
 const Home = () => {
-    const size = React.useContext(ResponsiveContext);
-
-  useEffect(() => {
-    console.log(size);
-    // Any side effects or subscriptions can be handled here
-  }, [size]);
-
   return (
-    <Box width="100%">
-      <Text>Tagline</Text>
-      <Heading level={2}>About</Heading>
-      <Paragraph></Paragraph>
-      {/* <Heading level={2}>Skills</Heading> */}
+    <Box
+      fill="horizontal"
+      width="100%"
+      direction="row-responsive"
+      gap="medium"
+      pad={{ bottom: "large" }}
+    >
+      <Box basis="3/4">
+        <Heading level={2}>Portfolio</Heading>
+        <ResponsiveContext.Consumer>
+          {(size) => (
+            <Grid
+              columns={
+                size === "small"
+                  ? "small"
+                  : [
+                      ["small", "medium"],
+                      ["small", "medium"],
+                    ]
+              }
+              // columns={{ count: 2, size: "small" }}
+              gap="medium"
+            >
+              <ProjectCard
+                title="Ray Tracer"
+                description="A C++ application that generates images based on customizable driver files."
+                imageSrc="/RayTracer_1.png"
+                link="/raytracer"
+              />
+              <ProjectCard
+                title="Project 2"
+                description="Description for Project 2."
+                imageSrc="/Project2.png"
+                link="/project2"
+              />
+              <ProjectCard
+                title="Project 3"
+                description="Description for Project 3."
+                imageSrc="/Project3.png"
+                link="/project3"
+              />
+              <ProjectCard
+                title="Project 4"
+                description="Description for Project 4."
+                imageSrc="/Project4.png"
+                link="/project4"
+              />
+            </Grid>
+          )}
+        </ResponsiveContext.Consumer>
+      </Box>
+      <Box basis="1/4" gap="small">
+        <Heading level={2}>Skills</Heading>
+        <Text size="small" color="dark-5">
+          Technologies and practices I use to build accessible, user-focused
+          products.
+        </Text>
+        {skillGroups.map((group) => (
+          <Box key={group.title} gap="xsmall" margin={{ top: "small" }}>
+            <Heading level={4} margin="none" size="small">
+              {group.title}
+            </Heading>
+            <Box direction="row" wrap gap="xsmall">
+              {group.skills.map((skill) => (
+                <Tag key={skill} name={skill} />
+              ))}
+            </Box>
+          </Box>
+        ))}
+      </Box>
       {/* <Heading level={3}>Development</Heading>
       <Tag name="React" />
       <Tag name="JavaScript" />
@@ -49,8 +151,8 @@ const Home = () => {
       <Tag name="Open Source" />
       <Tag name="TestCafe" />
       <Tag name="Jest" /> */}
-      <Heading level={2}>Projects</Heading>
-      <Box
+      {/* <Heading level={2}>Projects</Heading> */}
+      {/* <Box
         // direction="row-responsive"
         // justify="stretch"
         // alignSelf="center"
@@ -115,7 +217,7 @@ const Home = () => {
             <Image width="100%" fit="cover" src="/DS_graphic_1.png" />
           </Box>
         </Box>
-      </Box>
+      </Box> */}
 
       {/* <Box gap="medium" justify="evenly" direction="row-responsive">
         <Card height="250px" width={{ min: "small", max: "medium" }}>
@@ -157,9 +259,9 @@ const Home = () => {
         <AccordionPanel label="job 1">Text</AccordionPanel>
         <AccordionPanel label="job 2">Text</AccordionPanel>
       </Accordion> */}
-      <Heading level={2}>Contact</Heading>
+      {/* <Heading level={2}>Contact</Heading>
       <Anchor href="#" label="linkedin" />
-      <Anchor href="#" label="github" />
+      <Anchor href="#" label="github" /> */}
     </Box>
   );
 };
