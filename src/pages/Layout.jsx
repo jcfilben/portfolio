@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Accordion,
@@ -13,6 +13,7 @@ import {
   Header,
   Heading,
   Image,
+  Main,
   Menu,
   Nav,
   Paragraph,
@@ -29,11 +30,34 @@ import { HomeRounded, Menu as MenuIcon } from "grommet-icons";
 const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const pageTopRef = useRef(null);
   const [pageTitle, setPageTitle] = useState("Jessica Rosenquist");
   const [pageSubtitle, setPageSubtitle] = useState(
-    "Frontend UI/UX Developer & Accessibility Advocate",
+    "Software Engineer · Accessibility Advocate · Open Source Maintainer",
   );
   const [pageCTA, setPageCTA] = useState("Explore Projects");
+
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      const main = document.querySelector("main");
+      if (main) {
+        main.scrollTop = 0;
+        if (typeof main.scrollTo === "function") {
+          main.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        }
+      }
+
+      if (pageTopRef.current) {
+        pageTopRef.current.scrollIntoView({ block: "start", behavior: "auto" });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(id);
+  }, [location.pathname]);
 
   return (
     <Grommet
@@ -42,6 +66,7 @@ const Home = () => {
       full
       theme={theme}
     >
+      <div ref={pageTopRef} />
       <Page kind="wide">
         <ResponsiveContext.Consumer>
           {(size) => (
@@ -124,13 +149,17 @@ const Home = () => {
                     {pageSubtitle}
                   </Text>
                   {pageCTA && (
-                  <Box
-                    alignSelf={size === "small" ? "center" : "start"}
-                    width="small"
-                    margin={{ top: "medium" }}
-                  >
-                    <Button primary label={pageCTA} />
-                  </Box>
+                    <Box
+                      alignSelf={size === "small" ? "center" : "start"}
+                      width="small"
+                      margin={{ top: "medium" }}
+                    >
+                      <Button
+                        primary
+                        label={pageCTA}
+                        onClick={() => navigate("/projects")}
+                      />
+                    </Box>
                   )}
                 </Box>
                 {location.pathname !== "/contact" && (
@@ -157,12 +186,16 @@ const Home = () => {
           )}
         </ResponsiveContext.Consumer>
         <PageContent fill pad={{ horizontal: "xlarge" }}>
-          {/* <hr /> */}
-          <Outlet
-            context={{ setTitle: setPageTitle, setSubtitle: setPageSubtitle, setCTA: setPageCTA }}
-          />
+          <Main>
+            <Outlet
+              context={{
+                setTitle: setPageTitle,
+                setSubtitle: setPageSubtitle,
+                setCTA: setPageCTA,
+              }}
+            />
+          </Main>
         </PageContent>
-        {/* </Box> */}
       </Page>
     </Grommet>
   );

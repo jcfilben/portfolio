@@ -21,10 +21,12 @@ export const theme = {
       //   forestGreen: "#394b3d",
       //   cream: "#FCF8F5",
       cream: "#f2ecde",
-      white: "#f5f3ed",
+      // white: "#f5f3ed",
+      white: "#faf5eb",
       // white: "#f5f4f0",
       //   rust: "#C8573C",
       rust: "#b34f37",
+      opaqueRust: "rgba(179, 79, 55, 0.2)",
       sage: "#B0C4A5",
       taupe: "#8A7969",
       black: "#444444",
@@ -93,7 +95,7 @@ export const theme = {
     },
   },
   anchor: {
-    color: "cream",
+    color: { light: "brown", dark: "cream" },
   },
   button: {
     default: {},
@@ -102,6 +104,12 @@ export const theme = {
         color: "rust",
       },
     },
+    secondary: {
+      border: {
+        color: "rust",
+        width: "1px",
+      }
+    }
   },
   heading: {
     // weight: "lighter",
@@ -132,9 +140,9 @@ export const theme = {
       elevation: "none",
     },
   },
-  //   tag: {
-  //     border: {
-  //       color: "pink",
-  //     },
-  //   },
+    tag: {
+      border: {
+        color: "rust",
+      },
+    },
 };
