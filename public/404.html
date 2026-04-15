@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Portfolio</title>
+    <script>
+      // SPA redirect for GitHub Pages: encode the current path into a query
+      // param so index.html can restore it via history.replaceState.
+      var l = window.location;
+      var base = l.pathname.split('/').slice(0, 2).join('/');
+      var path = l.pathname.slice(base.length).replace(/^\//, '');
+      l.replace(
+        l.protocol + '//' + l.host + base + '/' +
+        '?p=' + path.replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
